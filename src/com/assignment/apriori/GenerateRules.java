@@ -6,7 +6,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import com.assignment.apriori.model.RuleModel;
 
+/**
+ * @author bharatjain
+ * @machine Mac OS Sierra (10.12.3)
+ */
 public class GenerateRules {
 
 	public static List<String> combination = new ArrayList<String>();
@@ -15,8 +20,9 @@ public class GenerateRules {
 
 	public static Map<String, Float> frequentItemSet = new HashMap<String, Float>();
 
-	public static void combinationUtil(String arr[], int size, int itemSetCount, int index, String data[], int i) {
-		// Current combination is ready to be printed, print it
+	public static void splitRecursiveCombination(String arr[], int size, int itemSetCount, int index, String data[], int i) {
+		
+		// Save current combination
 		if (index == itemSetCount) {
 
 			String temp = "";
@@ -30,37 +36,47 @@ public class GenerateRules {
 			return;
 		}
 
-		// When no more elements are there to put in data[]
+		//No elements then return
 		if (i >= size)
 			return;
 
 		// current is included, put next at next location
 		data[index] = arr[i];
-		combinationUtil(arr, size, itemSetCount, index + 1, data, i + 1);
+		splitRecursiveCombination(arr, size, itemSetCount, index + 1, data, i + 1);
 
-		// current is excluded, replace it with next (Note that
-		// i+1 is passed, but index is not changed)
-		combinationUtil(arr, size, itemSetCount, index, data, i + 1);
+		// excluded current & replace it with next (Note: i+1 is passed, but index is not changed)
+		splitRecursiveCombination(arr, size, itemSetCount, index, data, i + 1);
 	}
 
-	static void getSubSets(String arr[], int n, int itemsets) {
+	/**
+	 * @param arr
+	 * @param n
+	 * @param itemsets
+	 */
+	static void generateSubSets(String arr[], int n, int itemsets) {
 		// A temporary array to store all combination one by one
 		String data[] = new String[itemsets];
 
-		// Print all combination using temprary array 'data[]'
-		combinationUtil(arr, n, itemsets, 0, data, 0);
+		// Print all combination using temporary array
+		splitRecursiveCombination(arr, n, itemsets, 0, data, 0);
 	}
 
+	/**
+	 * @param combination
+	 * @param _subSet
+	 * @param minConfidence
+	 */
+	//This function generate the rules & store it 
 	static void generateRules(List<String> combination, Map.Entry<String, Float> _subSet, float minConfidence) {
 
 		float confidence = 0;
 		for (String _comb : combination) {
 
-			String remaining = getRemaining(Arrays.asList(_subSet.getKey().toString().split(",")), _comb);
+			// use S -> (I-S) to get remaining items
+			String remaining = getRemainingItemsFromItemSet(Arrays.asList(_subSet.getKey().toString().split(",")), _comb);
 
+			// Create the model which will store the output data (i.e. Rules )
 			RuleModel _model = new RuleModel();
-			
-			
 			
 			if (frequentItemSet.get(_comb) == null) {
 				if (_comb.split(",").length == 3) {
@@ -102,6 +118,7 @@ public class GenerateRules {
 				confidence=frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb);
 			}
 			
+			// If confidence>=minConfidence then only we are supposed to select the rule else it is discarded
 			if(confidence>=minConfidence){
 				_model.setSupportCount(_subSet.getValue());
 				_model.setLhs(getFormattedData(_comb));
@@ -114,7 +131,13 @@ public class GenerateRules {
 		}
 	}
 
-	static String getRemaining(List<String> _firstSet, String _comb) {
+	/**
+	 * @param _firstSet
+	 * @param _comb
+	 * @return
+	 */
+	// It gives the remaining item set using the rule S -> (I-S), where S & I are non-empty subsets 
+	static String getRemainingItemsFromItemSet(List<String> _firstSet, String _comb) {
 
 		List<String> _combList = new LinkedList<String>(Arrays.asList(_comb.split(",")));
 		List<String> _firstSet1 = new LinkedList<String>(_firstSet);
@@ -140,6 +163,10 @@ public class GenerateRules {
 		return remaining;
 	}
 
+	/**
+	 * No Param
+	 */
+	// Combines all the frequent item set in a Map to find the 
 	static void generateListToCalculateConfidence() {
 
 		for (Map.Entry<Integer, Map<String, Float>> _frequentSet : Apriori.frequentItemSet.entrySet()) {
@@ -149,6 +176,11 @@ public class GenerateRules {
 		}
 	}
 	
+	/**
+	 * @param combination
+	 * @return
+	 */
+	// Format the data to display it in beautify & readable manner
 	static String getFormattedData(String combination){
 		
 		String[] _split = combination.split(",");

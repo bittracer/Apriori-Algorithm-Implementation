@@ -8,11 +8,20 @@ import java.util.Map.Entry;
 
 import com.assignment.apriori.FileReader;
 
+
+/**
+ * @author bharatjain
+ * @machine Mac OS Sierra (10.12.3)
+ */
 public class FirstCandidateList {
 
 	static final List<String> uniqueItemSet = new ArrayList<String>();
 
-	public static Map<String, Float> findCandidateList(
+	/**
+	 * @param _columnList
+	 * @return
+	 */
+	public static Map<String, Float> generateFirstCandidateList(
 			Map<String, List<String>> _columnList) {
 
 		Float numberOfTrans = 0f;
@@ -48,6 +57,11 @@ public class FirstCandidateList {
 		return candidateItemset;
 	}
 
+	/**
+	 * @param _columnList
+	 * @return
+	 */
+	//This function calculates the unique item sets from Map<String, List<String>> columnList & other frequent item sets
 	public static List<String> findUniqueItemSet(
 			Map<String, List<String>> _columnList) {
 

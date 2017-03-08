@@ -1,5 +1,9 @@
 package com.assignment.apriori.model;
 
+/**
+ * @author bharatjain
+ * @machine Mac OS Sierra (10.12.3)
+ */
 public class RuleModel {
 
 	private float supportCount;

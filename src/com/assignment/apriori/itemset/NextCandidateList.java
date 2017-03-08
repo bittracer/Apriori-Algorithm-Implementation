@@ -6,8 +6,18 @@ import java.util.Map;
 
 import com.assignment.apriori.FileReader;
 
+/**
+ * @author bharatjain
+ * @machine Mac OS Sierra (10.12.3)
+ */
 public class NextCandidateList {
 
+	/**
+	 * @param _combination
+	 * @param itemSetSize
+	 * @return
+	 */
+	// This function will generate the candidate list from K=2 to N
 	public static Map<String, Float> getCandidateList(List<String> _combination, int itemSetSize) {
 
 		Map<String, Float> _candidateList = new HashMap<String, Float>();

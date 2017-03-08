@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author bharatjain
+ * @machine Mac OS Sierra (10.12.3)
+ */
 public class GenerateFrequentItemSet {
 
 	public static final List<String> uniqueList = new ArrayList<String>();
 	public static List<String> combination = new ArrayList<String>();
 
-//
-//	public static void main(String[] args) {
-//		String arr[] = { "arun", "tushar", "bharat" };
-//		int itemsets = 2;
-//		int n = arr.length;
-//		printCombination(arr, n, itemsets);
-//	}
-
+	/**
+	 * @param arr
+	 * @param size
+	 * @param itemSetCount
+	 * @param index
+	 * @param data
+	 * @param i
+	 */
 	public static void combinationUtil(String arr[], int size, int itemSetCount, int index, String data[], int i) {
 		// Current combination is ready to be printed, print it
 		if (index == itemSetCount) {
@@ -45,7 +49,12 @@ public class GenerateFrequentItemSet {
 		combinationUtil(arr, size, itemSetCount, index, data, i + 1);
 	}
 
-	public static void printCombination(String arr[], int n, int itemsets) {
+	/**
+	 * @param arr
+	 * @param n
+	 * @param itemsets
+	 */
+	public static void getCombination(String arr[], int n, int itemsets) {
 		// A temporary array to store all combination one by one
 		String data[] = new String[itemsets];
 
@@ -53,6 +62,9 @@ public class GenerateFrequentItemSet {
 		combinationUtil(arr, n, itemsets, 0, data, 0);
 	}
 
+	/**
+	 * @param candidateList
+	 */
 	public static void generateUniqueSets(Map<String, Float> candidateList) {
 
 		for (Map.Entry<String, Float> entry : candidateList.entrySet()) {
