@@ -21,6 +21,7 @@ public class FirstCandidateList {
 	 * @param _columnList
 	 * @return
 	 */
+	// Generates the first candidate list
 	public static Map<String, Float> generateFirstCandidateList(
 			Map<String, List<String>> _columnList) {
 

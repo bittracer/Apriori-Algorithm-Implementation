@@ -21,7 +21,7 @@ public class GenerateFrequentItemSet {
 	 * @param data
 	 * @param i
 	 */
-	public static void combinationUtil(String arr[], int size, int itemSetCount, int index, String data[], int i) {
+	public static void getKCombination(String arr[], int size, int itemSetCount, int index, String data[], int i) {
 		// Current combination is ready to be printed, print it
 		if (index == itemSetCount) {
 
@@ -42,11 +42,11 @@ public class GenerateFrequentItemSet {
 
 		// current is included, put next at next location
 		data[index] = arr[i];
-		combinationUtil(arr, size, itemSetCount, index + 1, data, i + 1);
+		getKCombination(arr, size, itemSetCount, index + 1, data, i + 1);
 
 		// current is excluded, replace it with next (Note that
 		// i+1 is passed, but index is not changed)
-		combinationUtil(arr, size, itemSetCount, index, data, i + 1);
+		getKCombination(arr, size, itemSetCount, index, data, i + 1);
 	}
 
 	/**
@@ -54,12 +54,12 @@ public class GenerateFrequentItemSet {
 	 * @param n
 	 * @param itemsets
 	 */
-	public static void getCombination(String arr[], int n, int itemsets) {
+	public static void getCombination(String _data[], int length, int itemsets) {
 		// A temporary array to store all combination one by one
 		String data[] = new String[itemsets];
 
 		// Print all combination using temprary array 'data[]'
-		combinationUtil(arr, n, itemsets, 0, data, 0);
+		getKCombination(_data, length, itemsets, 0, data, 0);
 	}
 
 	/**

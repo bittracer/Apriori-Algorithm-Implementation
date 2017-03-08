@@ -50,7 +50,7 @@ public class Apriori {
 			_fileList.add("data3");
 
 			// Get User Input
-			getUserInput();
+			getInputFromUser();
 
 			// Read the file in appropriate format
 			FileReader.readFile(filename);
@@ -128,6 +128,7 @@ public class Apriori {
 
 		} catch (Exception e) {
 			Logger.getGlobal().info(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -171,9 +172,9 @@ public class Apriori {
 	 * No Param
 	 */
 	// Reads the data from users input
-	static void getUserInput() {
+	static void getInputFromUser() {
 
-		System.out.println("Enter the file name to find the rules:(E.g. data1 or data2 or data 3)\n");
+		System.out.println("Enter the file name to find the rules:(E.g. data1 or data2 or data3)\n");
 		filename = in.nextLine();
 
 		while (!_fileList.contains(filename)) {

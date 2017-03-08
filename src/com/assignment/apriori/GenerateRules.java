@@ -20,6 +20,14 @@ public class GenerateRules {
 
 	public static Map<String, Float> frequentItemSet = new HashMap<String, Float>();
 
+	/**
+	 * @param arr
+	 * @param size
+	 * @param itemSetCount
+	 * @param index
+	 * @param data
+	 * @param i
+	 */
 	public static void splitRecursiveCombination(String arr[], int size, int itemSetCount, int index, String data[], int i) {
 		
 		// Save current combination
@@ -166,7 +174,7 @@ public class GenerateRules {
 	/**
 	 * No Param
 	 */
-	// Combines all the frequent item set in a Map to find the 
+	// Combines all the frequent item set in a Map 
 	static void generateListToCalculateConfidence() {
 
 		for (Map.Entry<Integer, Map<String, Float>> _frequentSet : Apriori.frequentItemSet.entrySet()) {
