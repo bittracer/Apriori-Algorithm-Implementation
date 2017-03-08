@@ -76,12 +76,3 @@
 	> package com.assignment.apriori.model;
 
 			> RuleModel.java 						- Model class to store the output
-
-
------ What is inside the assign3 folder on bluenose ?
-		
-		> It contains following files:
-			> Apriori.jar
-			> data1,data2,data3
-			> README.txt
-			> Project.zip (Project file which includes the source code)
