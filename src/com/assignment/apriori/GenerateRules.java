@@ -53,54 +53,64 @@ public class GenerateRules {
 
 	static void generateRules(List<String> combination, Map.Entry<String, Float> _subSet, float minConfidence) {
 
+		float confidence = 0;
 		for (String _comb : combination) {
 
 			String remaining = getRemaining(Arrays.asList(_subSet.getKey().toString().split(",")), _comb);
 
 			RuleModel _model = new RuleModel();
-			_model.setSupportCount(_subSet.getValue());
-			_model.setLhs(getFormattedData(_comb));
-			_model.setRhs(getFormattedData(remaining));
+			
+			
+			
 			if (frequentItemSet.get(_comb) == null) {
 				if (_comb.split(",").length == 3) {
 					if (frequentItemSet.get(_comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0] + ","
 							+ _comb.toString().split(",")[2]) != null) {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey())
+						confidence=frequentItemSet.get(_subSet.getKey())
 								/ frequentItemSet.get(_comb.toString().split(",")[1] + ","
-										+ _comb.toString().split(",")[0] + "," + _comb.toString().split(",")[2]));
+										+ _comb.toString().split(",")[0] + "," + _comb.toString().split(",")[2]);
 
 					} else if (frequentItemSet.get(_comb.toString().split(",")[2] + "," + _comb.toString().split(",")[0]
 							+ "," + _comb.toString().split(",")[1]) != null) {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey())
+						confidence=frequentItemSet.get(_subSet.getKey())
 								/ frequentItemSet.get(_comb.toString().split(",")[2] + ","
-										+ _comb.toString().split(",")[0] + "," + _comb.toString().split(",")[1]));
+										+ _comb.toString().split(",")[0] + "," + _comb.toString().split(",")[1]);
 
 					} else if (frequentItemSet.get(_comb.toString().split(",")[0] + "," + _comb.toString().split(",")[2]
 							+ "," + _comb.toString().split(",")[1]) != null) {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey())
+						confidence=frequentItemSet.get(_subSet.getKey())
 								/ frequentItemSet.get(_comb.toString().split(",")[0] + ","
-										+ _comb.toString().split(",")[2] + "," + _comb.toString().split(",")[1]));
+										+ _comb.toString().split(",")[2] + "," + _comb.toString().split(",")[1]);
 
 					} else if (frequentItemSet.get(_comb.toString().split(",")[2] + "," + _comb.toString().split(",")[1]
 							+ "," + _comb.toString().split(",")[0]) != null) {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey())
+						confidence=frequentItemSet.get(_subSet.getKey())
 								/ frequentItemSet.get(_comb.toString().split(",")[2] + ","
-										+ _comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0]));
+										+ _comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0]);
 
 					}
 				} else {
 					if (frequentItemSet.get(_comb) != null) {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb));
+						confidence=frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb);
 					} else {
-						_model.setConfidence(frequentItemSet.get(_subSet.getKey()) / frequentItemSet
-								.get(_comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0]));
+						confidence = frequentItemSet.get(_subSet.getKey()) / frequentItemSet
+								.get(_comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0]);
 					}
 				}
 
 			} else {
-				_model.setConfidence(frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb));
+				confidence=frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb);
 			}
-			_rules.add(_model);
+			
+			if(confidence>=minConfidence){
+				_model.setSupportCount(_subSet.getValue());
+				_model.setLhs(getFormattedData(_comb));
+				_model.setRhs(getFormattedData(remaining));
+				_model.setConfidence(confidence);
+				
+				_rules.add(_model);
+			}
+			
 		}
 	}
 

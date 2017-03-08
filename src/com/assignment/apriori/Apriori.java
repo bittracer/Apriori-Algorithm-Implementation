@@ -1,5 +1,7 @@
 package com.assignment.apriori;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,20 +126,40 @@ public class Apriori {
 
 			}
 
+
+			File file = new File("Rules_For_"+filename+".txt");
+			PrintWriter writer = new PrintWriter(file, "UTF-8");
+
+			writer.println("Summary:");
+			writer.println("Total rows in the original set:" + (FileReader.transaction.size() - 1));
+			writer.println("Total rules discovered:" + GenerateRules._rules.size());
+			writer.println("The selected measures: Support=" + minSupportCount + " Confidence=" + minConfidence);
+			writer.println("-------------------------------------------------------\n");
+			writer.println("Rules:\n");
+			
 			System.out.println("Summary:");
 			System.out.println("Total rows in the original set:" + (FileReader.transaction.size() - 1));
 			System.out.println("Total rules discovered:" + GenerateRules._rules.size());
 			System.out.println("The selected measures: Support=" + minSupportCount + " Confidence=" + minConfidence);
 			System.out.println("-------------------------------------------------------\n");
 			System.out.println("Rules:\n");
-			int ruleCount=1;
+			int ruleCount = 1;
+
+
 			for (RuleModel _model : GenerateRules._rules) {
 
-				System.out.println("Rule#"+ruleCount+++": (Support="+_model.getSupportCount()+", Confidence="+_model.getConfidence()+")");
-				System.out.println(_model.getLhs());
-				System.out.println("------>"+_model.getRhs());
-				System.out.println("\n");
+				writer.println("Rule#" + ruleCount+++ ": (Support=" + _model.getSupportCount() + ", Confidence="+ _model.getConfidence() + ")");
+				writer.println(_model.getLhs());
+				writer.println("------>" + _model.getRhs());
+				writer.println("\n");
+
+//				System.out.println("Rule#" + ruleCount++ + ": (Support=" + _model.getSupportCount() + ", Confidence="+ _model.getConfidence() + ")");
+//				System.out.println(_model.getLhs());
+//				System.out.println("------>" + _model.getRhs());
+//				System.out.println("\n");
 			}
+			
+			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
