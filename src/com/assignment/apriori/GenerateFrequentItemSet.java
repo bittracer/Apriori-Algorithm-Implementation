@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AprioriGen {
+public class GenerateFrequentItemSet {
 
 	static final List<String> uniqueList = new ArrayList<String>();
 	public static List<String> combination = new ArrayList<String>();

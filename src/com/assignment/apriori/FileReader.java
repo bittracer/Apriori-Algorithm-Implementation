@@ -15,8 +15,9 @@ public class FileReader {
 
 	static final Map<String, List<String>> columnList = new HashMap<String, List<String>>();
 
-	public static void readFile1(String string)
-			throws IOException {
+	static final Map<String, String> uniqueConbination = new HashMap<String, String>();
+
+	public static void readFile1(String string) throws IOException {
 
 		FileInputStream fis = new FileInputStream(string);
 
@@ -48,5 +49,13 @@ public class FileReader {
 		}
 
 		br.close();
+
+		for (Map.Entry<String, List<String>> _columnList : columnList.entrySet()) {
+			for (String _list : _columnList.getValue()) {
+				uniqueConbination.put(_list, _columnList.getKey());
+			}
+		}
+		System.out.println(uniqueConbination);
+
 	}
 }
