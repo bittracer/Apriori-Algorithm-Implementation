@@ -17,7 +17,7 @@ public class FileReader {
 
 	static final Map<String, String> uniqueConbination = new HashMap<String, String>();
 
-	public static void readFile1(String string) throws IOException {
+	public static void readFile(String string) throws IOException {
 
 		FileInputStream fis = new FileInputStream(string);
 
