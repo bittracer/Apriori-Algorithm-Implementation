@@ -1,10 +1,12 @@
-package com.assignment.apriori;
+package com.assignment.apriori.itemset;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.assignment.apriori.FileReader;
 
 public class FirstCandidateList {
 

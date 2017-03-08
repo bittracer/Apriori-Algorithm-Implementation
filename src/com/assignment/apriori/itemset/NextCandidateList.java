@@ -1,8 +1,10 @@
-package com.assignment.apriori;
+package com.assignment.apriori.itemset;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.assignment.apriori.FileReader;
 
 public class NextCandidateList {
 

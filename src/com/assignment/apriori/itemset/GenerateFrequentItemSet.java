@@ -1,4 +1,4 @@
-package com.assignment.apriori;
+package com.assignment.apriori.itemset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class GenerateFrequentItemSet {
 
-	static final List<String> uniqueList = new ArrayList<String>();
+	public static final List<String> uniqueList = new ArrayList<String>();
 	public static List<String> combination = new ArrayList<String>();
 
 //
@@ -45,7 +45,7 @@ public class GenerateFrequentItemSet {
 		combinationUtil(arr, size, itemSetCount, index, data, i + 1);
 	}
 
-	static void printCombination(String arr[], int n, int itemsets) {
+	public static void printCombination(String arr[], int n, int itemsets) {
 		// A temporary array to store all combination one by one
 		String data[] = new String[itemsets];
 

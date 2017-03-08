@@ -1,4 +1,4 @@
-package com.assignment.apriori;
+package com.assignment.apriori.model;
 
 public class RuleModel {
 

@@ -1,4 +1,4 @@
-package com.assignment.apriori;
+package com.assignment.apriori.itemset;
 
 import java.util.Iterator;
 import java.util.Map;
