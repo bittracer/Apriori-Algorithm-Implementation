@@ -113,7 +113,7 @@ public class GenerateRules {
 										+ _comb.toString().split(",")[1] + "," + _comb.toString().split(",")[0]);
 
 					}
-				} else {
+				} else if(_comb.split(",").length == 2){
 					if (frequentItemSet.get(_comb) != null) {
 						confidence=frequentItemSet.get(_subSet.getKey()) / frequentItemSet.get(_comb);
 					} else {
@@ -194,7 +194,7 @@ public class GenerateRules {
 		String[] _split = combination.split(",");
 		String data ="{";
 		for(String _entity:_split){
-			data += " "+FileReader.uniqueConbination.get(_entity) + "=" + _entity +" ";
+			data += " "+FileReader.uniqueConbination.get(_entity) + " = " + _entity +" ";
 		}
 		
 		data += "}";

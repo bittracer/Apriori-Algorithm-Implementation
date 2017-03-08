@@ -174,25 +174,25 @@ public class Apriori {
 	// Reads the data from users input
 	static void getInputFromUser() {
 
-		System.out.println("Enter the file name to find the rules:(E.g. data1 or data2 or data3)\n");
+		System.out.println("Enter the dataset name (E.g. data1 or data2 or data3):");
 		filename = in.nextLine();
 
 		while (!_fileList.contains(filename)) {
-			filename = getFileName(in, "Please enter correct file name:(E.g. data1 or data2 or data 3)\n");
+			filename = getFileName(in, "Please enter correct data set name (E.g. data1 or data2 or data3):");
 		}
 
-		System.out.println("Enter the Minimum Support Rate between 0 & 1");
+		System.out.println("Enter the Minimum Support Rate (>0 & <1):");
 		minSupportCount = in.nextFloat();
 
-		while (minSupportCount < 0.0 || minSupportCount > 1.0) {
-			minSupportCount = getCount(in, "Please enter the value between 0 & 1");
+		while (minSupportCount <= 0.0 || minSupportCount > 1.0) {
+			minSupportCount = getCount(in, "Please enter the Support rate greater than 0 & less than 1:");
 		}
 
-		System.out.println("Enter the Minimum Confidence Rate between 0 & 1");
+		System.out.println("Enter the Minimum Confidence Rate (>0 & <1):");
 		minConfidence = in.nextFloat();
 
-		while (minConfidence < 0.0 || minConfidence > 1.0) {
-			minConfidence = getCount(in, "Please enter the value between 0 & 1");
+		while (minConfidence <= 0.0 || minConfidence > 1.0) {
+			minConfidence = getCount(in, "Please enter the Confidence rate greater than 0 & less than 1:");
 		}
 
 	}
